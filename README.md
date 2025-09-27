@@ -19,13 +19,14 @@ Your training dataset should be structured as follows:
 
 handwriting_data/
 ├── images/
-│ ├── image1.jpg
-│ ├── image2.jpg
-│ └── ...
+│   ├── image1.jpg
+│   ├── image2.jpg
+│   └── ...
 └── ground-truth/
-├── image1.txt
-├── image2.txt
-└── ...
+    ├── image1.txt
+    ├── image2.txt
+    └── ...
+
 
 yaml
 Copy code
