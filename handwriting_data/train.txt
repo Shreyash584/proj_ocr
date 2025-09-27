@@ -1,0 +1,29 @@
+import os
+import shutil
+from pathlib import Path
+
+# Base path
+base_path = Path(r"D:\Academics\Text Extracting Using OCR\handwriting_data")
+images_path = base_path / "images"
+gt_path = base_path / "ground-truth"
+
+# Output path for training
+train_path = base_path / "tess_training"
+train_path.mkdir(exist_ok=True)
+
+# 1. Convert images and ground-truth to Tesseract training format (.box + .tif)
+# Tesseract requires each image as .tif and a matching .box file with the same name
+# For now, we'll copy images and ground-truth txts as a starting step
+
+for img_file in images_path.glob("*.*"):  # Loop over images
+    base_name = img_file.stem
+    gt_file = gt_path / f"{base_name}.txt"
+    
+    if gt_file.exists():
+        # Copy image and gt to training folder
+        shutil.copy(img_file, train_path / f"{base_name}.tif")
+        shutil.copy(gt_file, train_path / f"{base_name}.gt.txt")
+    else:
+        print(f"Warning: Ground truth missing for {img_file.name}")
+
+print("Dataset prepared. Next step: create box files using Tesseract.")
